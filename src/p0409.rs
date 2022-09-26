@@ -18,11 +18,10 @@ impl Solution {
 }
 
 mod test {
-    use crate::Solution;
-
     //noinspection SpellCheckingInspection
     #[test]
     fn p0001() {
+        use crate::Solution;
         assert_eq!(7, Solution::longest_palindrome(String::from("abccccdd")));
         assert_eq!(1, Solution::longest_palindrome(String::from("a")));
     }

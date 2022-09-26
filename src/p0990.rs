@@ -29,12 +29,10 @@ impl Solution {
 }
 
 mod test {
-    use crate::Solution;
-
     #[test]
     fn p0990() {
-        let input_0 = vec![String::from("c==c"), String::from("b==d"),
-                           String::from("x!=z")];
+        use crate::Solution;
+        let input_0 = vec![String::from("c==c"), String::from("b==d"), String::from("x!=z")];
         assert_eq!(true, Solution::equations_possible(input_0));
 
         let input_1 = vec![String::from("a==b"), String::from("b!=a")];
