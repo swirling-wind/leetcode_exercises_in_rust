@@ -6,10 +6,12 @@ mod p0409;
 mod p0833;
 mod p0022;
 mod p0019;
+mod p0658;
 
-struct Solution {}
-
-struct AnotherSolution {}
+#[allow(dead_code)]
+struct Solution;
+#[allow(dead_code)]
+struct AnotherSolution;
 
 fn main() {
 }

@@ -76,13 +76,18 @@ mod test {
     #[test]
     fn p0022() {
         use crate::Solution;
+        let expects = vec![
+            vec![],
+            vec![String::from("()")],
+            vec![String::from("(())"), String::from("()()")],
+            vec![String::from("((()))"), String::from("(()())"),
+                 String::from("(())()"), String::from("()(())"), String::from("()()()")]];
 
-        for num in 1..8 {
-            let outputs = Solution::generate_parenthesis(num);
-            for item in outputs {
-                print!("{item} \t");
+        for num  in 1..4_usize {
+            let outputs = Solution::generate_parenthesis(num as i32);
+            for index in 0..outputs.len() {
+                assert!(outputs[index].eq(&expects[num][index]));
             }
-            println!()
         }
     }
 }

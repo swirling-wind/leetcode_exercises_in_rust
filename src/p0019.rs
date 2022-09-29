@@ -39,6 +39,13 @@ impl Solution {
 
 
 mod test {
+    use crate::p0019::ListNode;
+    use crate::Solution;
+
     #[test]
-    fn p0019() {}
+    fn p0019() {
+        let input_0: Option<Box<ListNode>> = Some(Box::<ListNode>::new( ListNode::new(1)));
+        let result_0 = Solution::remove_nth_from_end(input_0, 1);
+        assert_eq!(result_0, None);
+    }
 }
