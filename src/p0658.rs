@@ -2,53 +2,20 @@ use crate::Solution;
 
 impl Solution {
     pub fn find_closest_elements(arr: Vec<i32>, mut k: i32, x: i32) -> Vec<i32> {
-        let mut low: i32 = 0;
-        let mut high: i32 = (arr.len() - 1) as i32;
-        let mut mid: i32 = 0;
-        let mut find = false;
-
-        while low < high {
-            mid = (low + high) / 2;
-            if x == arr[mid as usize] {
-                find = true;
-                break;
-            } else if x > arr[mid as usize] {
-                low = mid + 1;
+        let mut low = 0;
+        let mut high = arr.len() as i32 - 1;
+        while high - low >= k {
+            if (arr[low as usize] - x).abs() > (arr[high as usize] - x).abs() {
+                low += 1;
             } else {
-                high = mid - 1;
+                high -= 1;
             }
         }
-
         let mut result: Vec<i32> = vec![];
-        let start: i32 = if find { mid } else { low };
-
-        println!("{}", start);
-
-        let mut left: i32 = start - 1;
-        let mut right: i32 = start;
-
-        while k > 0 {
-            if left < 0 || right >= arr.len() as i32 {
-                if right >= arr.len() as i32 {
-                    result.push(arr[left as usize]);
-                    left -= 1;
-                } else {
-                    result.push(arr[right as usize]);
-                    right += 1;
-                }
-            } else {
-                if (x - arr[left as usize]).abs() <= (x - arr[right as usize]).abs() {
-                    result.push(arr[left as usize]);
-                    left -= 1;
-                } else {
-                    result.push(arr[right as usize]);
-                    right += 1;
-                }
-            }
-            k -= 1;
+        for num in low..high+1 {
+            result.push(arr[num as usize]);
         }
-        result.sort();
-        result
+        return result;
     }
 }
 
