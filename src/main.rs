@@ -7,6 +7,9 @@ mod p0833;
 mod p0022;
 mod p0019;
 mod p0658;
+mod p0218;
+mod cw_10_04;
+mod cw_10_06;
 
 #[allow(dead_code)]
 struct Solution;
