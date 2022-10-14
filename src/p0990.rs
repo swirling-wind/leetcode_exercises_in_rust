@@ -30,6 +30,7 @@ impl Solution {
 
 mod test {
     #[test]
+    #[ignore]
     fn p0990() {
         use crate::Solution;
         let input_0 = vec![String::from("c==c"), String::from("b==d"), String::from("x!=z")];

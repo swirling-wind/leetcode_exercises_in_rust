@@ -38,6 +38,7 @@ impl Solution {
 
 mod test {
     #[test]
+    #[ignore]
     fn p0833() {
         use crate::Solution;
         assert!(String::from("RR.L").eq(&Solution::push_dominoes(String::from("RR.L"))));

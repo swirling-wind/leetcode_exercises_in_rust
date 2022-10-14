@@ -88,6 +88,7 @@ mod split_strings {
     use super::*;
 
     #[test]
+    #[ignore]
     fn basic() {
         assert_eq!(split_strings("abcdef"), ["ab", "cd", "ef"]);
         assert_eq!(split_strings("abcdefg"), ["ab", "cd", "ef", "g_"]);
@@ -100,6 +101,7 @@ fn basics_list_testing(m: u64, n: u64, exp: Vec<(u64, u64)>) -> () {
 }
 
 #[test]
+#[ignore]
 fn basics_list_squared() {
     basics_list_testing(1, 250, vec![(1, 1), (42, 2500), (246, 84100)]);
     basics_list_testing(1, 250, vec![(1, 1), (42, 2500), (246, 84100)]);
@@ -109,6 +111,7 @@ fn basics_list_squared() {
 
 // Rust tests
 #[test]
+#[ignore]
 fn sample_test() {
     // assert_eq!(camel_case("test case"), "TestCase");
     // assert_eq!(camel_case("camel case method"), "CamelCaseMethod");

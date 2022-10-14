@@ -20,6 +20,7 @@ impl Solution {
 mod test {
     //noinspection SpellCheckingInspection
     #[test]
+    #[ignore]
     fn p0001() {
         use crate::Solution;
         assert_eq!(7, Solution::longest_palindrome(String::from("abccccdd")));

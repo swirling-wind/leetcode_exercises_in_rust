@@ -21,6 +21,7 @@ impl Solution {
 
 mod test {
     #[test]
+    #[ignore]
     fn p0658() {
         use crate::Solution;
 

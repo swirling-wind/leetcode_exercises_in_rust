@@ -104,11 +104,13 @@ fn rot13(message: &str) -> String {
 }
 
 #[test]
+#[ignore]
 fn example_test_1() {
     assert_eq!("42 -9", high_and_low("8 3 -5 42 -1 0 0 -9 4 7 4 -4"));
 }
 
 #[test]
+#[ignore]
 fn example_test_2() {
     assert_eq!("3 1", high_and_low("1 2 3"));
 }
@@ -118,6 +120,7 @@ mod tests {
     use super::validate_pin;
 
     #[test]
+    #[ignore]
     fn invalid_length_tests() {
         assert_eq!(validate_pin("1"), false);
         assert_eq!(validate_pin("12"), false);
@@ -131,12 +134,14 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn non_digit_chars_tests() {
         assert_eq!(validate_pin("a234"), false);
         assert_eq!(validate_pin(".234"), false);
     }
 
     #[test]
+    #[ignore]
     fn valid_pin_tests() {
         assert_eq!(validate_pin("1234"), true);
         assert_eq!(validate_pin("0000"), true);
@@ -158,6 +163,7 @@ mod longest {
     }
 
     #[test]
+    #[ignore]
     fn basic_tests() {
         testing("aretheyhere", "yestheyarehere", "aehrsty");
         testing("loopingisfunbutdangerous", "lessdangerousthancoding", "abcdefghilnoprstu");
@@ -169,6 +175,7 @@ mod binary_slice_to_number {
     use super::binary_slice_to_number;
 
     #[test]
+    #[ignore]
     fn example_tests() {
         assert_eq!(binary_slice_to_number(&vec![0, 0, 0, 1]), 1);
         assert_eq!(binary_slice_to_number(&vec![0, 0, 1, 0]), 2);
@@ -182,6 +189,7 @@ mod find_missing_letter {
     use super::find_missing_letter;
 
     #[test]
+    #[ignore]
     fn example_tests() {
         assert_eq!(find_missing_letter(&['a', 'b', 'c', 'd', 'f']), 'e');
         assert_eq!(find_missing_letter(&['O', 'Q', 'R', 'S']), 'P');
@@ -192,6 +200,7 @@ mod multiples {
     use super::multiples;
 
     #[test]
+    #[ignore]
     fn sample_tests() {
         // assertion(expected, input);
         assertion(23, 10);
@@ -216,6 +225,7 @@ mod is_valid_ip {
     use super::is_valid_ip;
 
     #[test]
+    #[ignore]
     fn sample_test() {
         assert!(is_valid_ip("0.0.0.0"));
         assert!(is_valid_ip("12.255.56.1"));
@@ -253,6 +263,7 @@ mod rot13 {
     }
 
     #[test]
+    #[ignore]
     fn sample_tests() {
         dotest("test", "grfg");
         dotest("Test", "Grfg");

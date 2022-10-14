@@ -74,6 +74,7 @@ impl Solution {
 
 mod test {
     #[test]
+    #[ignore]
     fn p0022() {
         use crate::Solution;
         let expects = vec![

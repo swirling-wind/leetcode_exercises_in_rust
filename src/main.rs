@@ -14,8 +14,6 @@ mod cw_10_07;
 
 #[allow(dead_code)]
 struct Solution;
-#[allow(dead_code)]
-struct AnotherSolution;
 
 fn main() {
 }

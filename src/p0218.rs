@@ -43,6 +43,7 @@ impl Solution {
 
 mod test {
     #[test]
+    #[ignore]
     fn p0218() {
         use crate::Solution;
         let input: Vec<Vec<i32>> = vec![vec![2, 9, 10], vec![3, 7, 15], vec![5, 12, 12],

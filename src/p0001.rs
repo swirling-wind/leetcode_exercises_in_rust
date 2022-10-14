@@ -16,6 +16,7 @@ impl Solution {
 
 mod test {
     #[test]
+    #[ignore]
     fn p0001() {
         use crate::Solution;
         assert!(Solution::two_sum([2, 7, 11, 15].to_vec(), 9).iter().all(|item| vec![1, 0].contains(item)));
