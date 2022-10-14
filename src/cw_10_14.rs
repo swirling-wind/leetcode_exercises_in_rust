@@ -1,3 +1,5 @@
+use std::ops::Add;
+
 #[derive(Debug)]
 struct Brain<'life> {
     data_ptr: usize,
@@ -8,7 +10,7 @@ struct Brain<'life> {
 
     input_ptr: usize,
 
-    output: Vec<u8>
+    output: Vec<u8>,
 }
 
 fn brain_luck(code: &str, input: Vec<u8>) -> Vec<u8> {
@@ -45,7 +47,7 @@ fn brain_luck(code: &str, input: Vec<u8>) -> Vec<u8> {
                 br.output.push(br.data[br.data_ptr]);
             }
             ',' => {
-                br.data[br.data_ptr] =  input[br.input_ptr];
+                br.data[br.data_ptr] = input[br.input_ptr];
                 br.input_ptr += 1;
             }
             '[' => {
@@ -56,8 +58,7 @@ fn brain_luck(code: &str, input: Vec<u8>) -> Vec<u8> {
 
                         if br.operations[br.op_ptr] == '[' as u8 {
                             pairs += 1;
-                        }
-                        else if br.operations[br.op_ptr] == ']' as u8 {
+                        } else if br.operations[br.op_ptr] == ']' as u8 {
                             pairs -= 1;
                             if pairs == 0 {
                                 break;
@@ -75,8 +76,7 @@ fn brain_luck(code: &str, input: Vec<u8>) -> Vec<u8> {
 
                         if br.operations[br.op_ptr] == ']' as u8 {
                             pairs += 1;
-                        }
-                        else if br.operations[br.op_ptr] == '[' as u8 {
+                        } else if br.operations[br.op_ptr] == '[' as u8 {
                             pairs -= 1;
                             if pairs == 0 {
                                 break;
@@ -96,11 +96,124 @@ fn brain_luck(code: &str, input: Vec<u8>) -> Vec<u8> {
 }
 
 fn make_readable(seconds: u32) -> String {
-
-    String::from("")
+    format!("{:02}:{:02}:{:02}",
+            seconds / 3600,
+            (seconds % 3600) / 60,
+            seconds % 60)
 }
 
 
+
+fn format_duration(seconds: u64) -> String {
+    if seconds == 0 {
+        return String::from("now");
+    }
+
+    let years = seconds / 31536000;
+    let days = (seconds % 31536000) / 86400;
+    let hours = (seconds % 86400) / 3600;
+    let minutes = (seconds % 3600) / 60;
+    let seconds = seconds % 60;
+    let elements = [years, days, hours, minutes, seconds];
+    let mut result: String = String::new();
+
+    match years {
+        0 => {}
+        1 => {
+            result.push_str("1 year");
+        }
+        _ => {
+            result.push_str(format!("{} years", years).as_str());
+        }
+    };
+
+    if elements[0..1].iter().sum::<u64>() > 0 {
+        match elements[1..].iter().filter(|&&value| value > 0).count() {
+            0=>{},
+            1=> {
+                result.push_str(" and ");
+            },
+            _ => {
+                result.push_str(", ");
+            }
+        };
+    }
+
+    match days {
+        0 => {}
+        1 => {
+            result.push_str("1 day");
+        }
+        _ => {
+            result.push_str(format!("{} days", days).as_str());
+        }
+    };
+
+    if elements[0..2].iter().sum::<u64>() > 0 {
+        match elements[2..].iter().filter(|&&value| value > 0).count() {
+            0=>{},
+            1=> {
+                result.push_str(" and ");
+            },
+            _ => {
+                result.push_str(", ");
+            }
+        };
+    }
+
+    match hours {
+        0 => {}
+        1 => {
+            result.push_str("1 hour");
+        }
+        _ => {
+            result.push_str(format!("{} hours", hours).as_str());
+        }
+    };
+
+    if elements[0..3].iter().sum::<u64>() > 0 {
+        match elements[3..].iter().filter(|&&value| value > 0).count() {
+            0=>{},
+            1=> {
+                result.push_str(" and ");
+            },
+            _ => {
+                result.push_str(", ");
+            }
+        };
+    }
+
+    match minutes {
+        0 => {}
+        1 => {
+            result.push_str("1 minute");
+        }
+        _ => {
+            result.push_str(format!("{} minutes", minutes).as_str());
+        }
+    };
+    if elements[0..4].iter().sum::<u64>() > 0 {
+        match elements[4..].iter().filter(|&&value| value > 0).count() {
+            0=>{},
+            1=> {
+                result.push_str(" and ");
+            },
+            _ => {
+                result.push_str(", ");
+            }
+        };
+    }
+    match seconds {
+        0 => {}
+        1 => {
+            result.push_str("1 second");
+        }
+        _ => {
+            result.push_str(format!("{} seconds", seconds).as_str());
+        }
+    };
+    return result;
+}
 
 #[cfg(test)]
 mod tests {
@@ -128,14 +241,14 @@ mod tests {
         v
     }
 
-    use super::make_readable;
-
     const ERR_MSG: &str = "\nYour result (left) did not match the expected output (right)";
 
     fn dotest(s: u32, expected: &str) {
         assert_eq!(make_readable(s), expected, "{ERR_MSG} with seconds = {s}")
     }
+
     #[test]
+    #[ignore]
     fn make_readable_fixed_tests() {
         dotest(0, "00:00:00");
         dotest(59, "00:00:59");
@@ -145,5 +258,15 @@ mod tests {
         dotest(86399, "23:59:59");
         dotest(86400, "24:00:00");
         dotest(359999, "99:59:59");
+    }
+
+    #[test]
+    fn test_basic() {
+        assert_eq!(format_duration(1), "1 second");
+        assert_eq!(format_duration(62), "1 minute and 2 seconds");
+        assert_eq!(format_duration(120), "2 minutes");
+        assert_eq!(format_duration(3600), "1 hour");
+        assert_eq!(format_duration(3662), "1 hour, 1 minute and 2 seconds");
+        assert_eq!(format_duration(15731080), "182 days, 1 hour, 44 minutes and 40 seconds");
     }
 }
