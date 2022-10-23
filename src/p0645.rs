@@ -21,6 +21,7 @@ impl Solution {
 
 mod test {
     #[test]
+    #[ignore]
     fn p0658() {
         use crate::Solution;
         dbg!(Solution::find_error_nums(vec![1,2,2,4]));

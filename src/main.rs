@@ -1,5 +1,5 @@
 extern crate core;
-mod p0645;
+mod cw_10_23;
 
 #[allow(dead_code)]
 struct Solution;
